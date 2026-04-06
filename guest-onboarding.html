@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guest Onboarding — The Bhagavata Podcast</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #0d1b3e;
+      --navy-mid:  #152550;
+      --navy-light:#1e3468;
+      --gold:      #f0c040;
+      --gold-dim:  #b89020;
+      --cream:     #f5f0e8;
+      --text:      #1a1a2e;
+      --muted:     #6b7280;
+      --border:    #e5e0d6;
+      --bg:        #faf8f4;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--navy);
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 80% 50%, rgba(30,52,104,0.8) 0%, transparent 60%),
+        radial-gradient(ellipse at 10% 80%, rgba(240,192,64,0.06) 0%, transparent 50%);
+    }
+    .header-inner {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 64px 32px 56px;
+    }
+    .ochs-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.85;
+      margin-bottom: 20px;
+    }
+    .gold-rule {
+      width: 40px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 24px;
+      opacity: 0.7;
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+    }
+    h1 span {
+      color: var(--gold);
+    }
+    .header-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      font-weight: 300;
+      letter-spacing: 0.2px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--navy-mid);
+      border-bottom: 1px solid rgba(240,192,64,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    nav a {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      padding: 16px 20px 14px;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    nav a:hover {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+
+    /* ── MAIN LAYOUT ── */
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 32px 80px;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 56px 0 0;
+    }
+    .section-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .section-divider {
+      width: 32px;
+      height: 2px;
+      background: var(--gold);
+      margin: 16px 0 24px;
+      opacity: 0.6;
+    }
+    p {
+      color: #374151;
+      font-size: 15.5px;
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── EPISODE CARDS ── */
+    .episodes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .ep-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: block;
+    }
+    .ep-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(13,27,62,0.12);
+    }
+    .ep-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      background: var(--navy);
+    }
+    .ep-info {
+      padding: 12px 14px 14px;
+    }
+    .ep-num {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 4px;
+    }
+    .ep-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.4;
+    }
+
+    /* ── INFO BLOCKS ── */
+    .info-block {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin-bottom: 16px;
+    }
+    .info-block:last-child { margin-bottom: 0; }
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    ul.clean {
+      list-style: none;
+      padding: 0;
+    }
+    ul.clean li {
+      font-size: 15px;
+      color: #374151;
+      line-height: 1.65;
+      padding: 6px 0 6px 20px;
+      position: relative;
+      border-bottom: 1px solid #f3f0ea;
+    }
+    ul.clean li:last-child { border-bottom: none; }
+    ul.clean li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 15px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0.7;
+    }
+
+    /* ── CHECKLIST ── */
+    ul.checklist {
+      list-style: none;
+      padding: 0;
+    }
+    ul.checklist li {
+      font-size: 15px;
+      color: #374151;
+      line-height: 1.65;
+      padding: 8px 0 8px 32px;
+      position: relative;
+      border-bottom: 1px solid #f3f0ea;
+    }
+    ul.checklist li:last-child { border-bottom: none; }
+    ul.checklist li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--gold);
+      border-radius: 3px;
+      opacity: 0.6;
+    }
+
+    /* ── FLOW TIMELINE ── */
+    .timeline {
+      position: relative;
+      padding-left: 24px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--gold), rgba(240,192,64,0.2));
+    }
+    .tl-item {
+      position: relative;
+      padding: 0 0 24px 24px;
+    }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-dot {
+      position: absolute;
+      left: -17px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 2px rgba(240,192,64,0.3);
+    }
+    .tl-time {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: var(--gold-dim);
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .tl-desc {
+      font-size: 15px;
+      color: #374151;
+      line-height: 1.6;
+    }
+
+    /* ── CONTACT FOOTER ── */
+    footer {
+      background: var(--navy);
+      margin-top: 80px;
+    }
+    .footer-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 48px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .footer-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(240,192,64,0.6);
+      margin-bottom: 12px;
+    }
+    .footer-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      color: #fff;
+      font-weight: 600;
+    }
+    .footer-link {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+    }
+    .footer-link:hover { color: var(--gold); }
+    .footer-copy {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 12px;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.5px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .header-inner, main, .nav-inner, .footer-inner { padding-left: 20px; padding-right: 20px; }
+      nav a { padding: 14px 14px 12px; font-size: 11px; }
+      .info-block { padding: 20px; }
+      .episodes-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="ochs-label">Oxford Centre for Hindu Studies</div>
+    <div class="gold-rule"></div>
+    <h1>Welcome to <span>The Bhagavata Podcast</span></h1>
+    <p class="header-sub">A guide for guests and contributors</p>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#about">About</a>
+    <a href="#episodes">Episodes</a>
+    <a href="#recording">Recording</a>
+    <a href="#preparing">Preparing</a>
+    <a href="#flow">Episode Flow</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">The Show</div>
+    <h2>About the Podcast</h2>
+    <div class="section-divider"></div>
+    <p>The Bhagavata Podcast is an academic series produced by the Gaudiya Studies Research Programme at the Oxford Centre for Hindu Studies. Each episode is a conversation exploring a chapter of the Bhagavata Purana — its philosophy, history, commentarial tradition, and living relevance.</p>
+    <p>Our audience spans scholars, practitioners, and curious minds worldwide. The format is unhurried and substantive: two people in genuine dialogue with one of the world's most remarkable texts.</p>
+  </section>
+
+  <!-- RECENT EPISODES -->
+  <section id="episodes">
+    <div class="section-label">Recent Episodes</div>
+    <h2>Get a Feel for the Show</h2>
+    <div class="section-divider"></div>
+    <p style="margin-bottom: 24px;">These three recent episodes give a good sense of the tone, pace, and depth we're aiming for.</p>
+    <div class="episodes-grid">
+      <a class="ep-card" href="https://www.youtube.com/watch?v=Xi4uK5YfsLk" target="_blank" rel="noopener">
+        <img class="ep-thumb" src="https://img.youtube.com/vi/Xi4uK5YfsLk/mqdefault.jpg" alt="Episode 1.19 thumbnail" />
+        <div class="ep-info">
+          <div class="ep-num">Episode 1.19</div>
+          <div class="ep-title">What Would You Do If You Had Seven Days to Live?</div>
+        </div>
+      </a>
+      <a class="ep-card" href="https://www.youtube.com/watch?v=XQMPYx1VNEs" target="_blank" rel="noopener">
+        <img class="ep-thumb" src="https://img.youtube.com/vi/XQMPYx1VNEs/mqdefault.jpg" alt="Episode 1.18 thumbnail" />
+        <div class="ep-info">
+          <div class="ep-num">Episode 1.18</div>
+          <div class="ep-title">A King, a Curse, and a Seven-Day Deadline</div>
+        </div>
+      </a>
+      <a class="ep-card" href="https://www.youtube.com/watch?v=-MaTK0T_L1M" target="_blank" rel="noopener">
+        <img class="ep-thumb" src="https://img.youtube.com/vi/-MaTK0T_L1M/mqdefault.jpg" alt="Episode 1.17 thumbnail" />
+        <div class="ep-info">
+          <div class="ep-num">Episode 1.17</div>
+          <div class="ep-title">If Evil Surrenders to You, What Do You Do?</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- RECORDING -->
+  <section id="recording">
+    <div class="section-label">Technical Setup</div>
+    <h2>Recording with Riverside</h2>
+    <div class="section-divider"></div>
+    <p style="margin-bottom: 28px;">We record using <strong>Riverside.fm</strong>, which captures broadcast-quality audio and video from each participant's own device. You don't need an account — Gopinath will send you a direct link to join the session.</p>
+
+    <div class="info-block">
+      <h3>How to Join</h3>
+      <ul class="clean">
+        <li>Click the link in your invitation email</li>
+        <li>Open it in <strong>Google Chrome</strong> — other browsers may not work</li>
+        <li>Allow microphone and camera access when prompted</li>
+        <li>You'll land directly in the studio — no download required</li>
+      </ul>
+    </div>
+
+    <div class="info-block">
+      <h3>Tech Requirements</h3>
+      <ul class="clean">
+        <li><strong>Microphone:</strong> A USB or XLR mic is ideal; built-in laptop mic is a fine fallback — please avoid phone earbuds if possible</li>
+        <li><strong>Camera:</strong> Built-in webcam is perfectly fine; external camera is a bonus</li>
+        <li><strong>Internet:</strong> Strong WiFi is ideal</li>
+        <li><strong>Environment:</strong> A quiet room, away from open windows or air conditioning</li>
+        <li><strong>Lighting:</strong> Face a window or lamp — avoid strong light from behind you</li>
+      </ul>
+    </div>
+
+    <div class="info-block">
+      <h3>Pre-Call Checklist</h3>
+      <ul class="checklist">
+        <li>Test your mic and camera in Chrome before the session</li>
+        <li>Close other applications and browser tabs</li>
+        <li>Use headphones or earbuds to avoid echo</li>
+        <li>Silence your phone and notifications during the recording</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PREPARING -->
+  <section id="preparing">
+    <div class="section-label">Preparation</div>
+    <h2>Preparing for the Conversation</h2>
+    <div class="section-divider"></div>
+
+    <div class="info-block">
+      <h3>What to Bring</h3>
+      <ul class="clean">
+        <li>You don't need anything in particular — guests have found it useful to have notes or texts open nearby</li>
+        <li>Your primary texts, commentaries, or references — feel free to have them open in front of you</li>
+        <li>A central question or tension in your area of focus that you'd like to explore</li>
+      </ul>
+    </div>
+
+    <div class="info-block">
+      <h3>What to Expect</h3>
+      <ul class="clean">
+        <li>Conversations aim for <strong>45–55 minutes</strong></li>
+        <li>The tone is scholarly but accessible — think a rich dialogue between two friends, not a lecture</li>
+        <li>Bhrigupada will guide the conversation; feel free to push back, go deep, and ask your own questions</li>
+        <li>We lightly edit for clarity but preserve the natural flow of dialogue</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- EPISODE FLOW -->
+  <section id="flow">
+    <div class="section-label">Structure</div>
+    <h2>Usual Flow of an Episode</h2>
+    <div class="section-divider"></div>
+
+    <div class="info-block">
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-time">1–2 min</div>
+          <div class="tl-desc">Bhrigupada introduces the chapter and the guest</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-time">3–5 min</div>
+          <div class="tl-desc">Guest shares an overview of the chapter — what listeners will encounter, what the text holds</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-time">~40 min</div>
+          <div class="tl-desc">Bhrigupada opens with the first question, and the conversation unfolds from there</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-time">5 min</div>
+          <div class="tl-desc">Closing reflections — a chance for either guest or host to share something they'd like listeners to carry with them</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER / CONTACT -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div class="footer-label">Contact</div>
+    <div class="footer-name">Gopinath</div>
+    <a class="footer-link" href="mailto:gopinath@ochs.org.uk">gopinath@ochs.org.uk</a>
+    <a class="footer-link" href="https://ochs.org.uk" target="_blank" rel="noopener">ochs.org.uk</a>
+    <div class="footer-copy">The Bhagavata Podcast · Oxford Centre for Hindu Studies · Gaudiya Studies Research Programme</div>
+  </div>
+</footer>
+
+</body>
+</html>
