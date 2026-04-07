@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Bhagavata Podcast</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+            --saffron: #E8A838;
+            --burgundy: #7B2D3B;
+      --ink: #1A1A2E;
+      --cream: #FFFCF5;
+              --border: #E8E4DD;
+        }
+    body {
+              font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+}
+    .container {
+            max-width: 640px;
+      width: 100%;
+      text-align: center;
+}
+    .logo {
+            font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 600;
+      color: var(--burgundy);
+      margin-bottom: 0.5rem;
+}
+    .tagline {
+            font-size: 1rem;
+      color: #6B6B7B;
+      margin-bottom: 3rem;
+      font-style: italic;
+}
+    .cards {
+            display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+}
+    .card {
+            display: block;
+      background: #fff;
+            border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem 2rem;
+      text-decoration: none;
+      color: var(--ink);
+      transition: box-shadow 0.2s, border-color 0.2s;
+}
+    .card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border-color: var(--saffron);
+}
+    .card-title {
+            font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--burgundy);
+      margin-bottom: 0.4rem;
+}
+    .card-desc {
+            font-size: 0.9rem;
+      color: #6B6B7B;
+}
+    .divider {
+            width: 60px;
+      height: 3px;
+      background: var(--saffron);
+      margin: 0 auto 2.5rem;
+      border-radius: 2px;
+    }
+  </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="logo">The Bhagavata Podcast</div>
+    <div class="divider"></div>
+    <p class="tagline">Wisdom. Story. Transformation.</p>
+        <div class="cards">
+          <a class="card" href="bhagavata_podcast_season2_strategy.html">
+            <div class="card-title">Season 2 Growth Strategy</div>
+            <div class="card-desc">Our roadmap, goals, and strategic direction for Season 2.</div>
+          </a>
+          <a class="card" href="guest-onboarding.html">
+            <div class="card-title">Guest Onboarding</div>
+            <div class="card-desc">Everything guests need to know before joining the podcast.</div>
+      </a>
+    </div>
+        </div>
+</body>
+</html>
